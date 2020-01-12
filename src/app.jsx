@@ -12,7 +12,7 @@ class App extends Component {
       display: "0"
     };
   }
-
+ // ada df a
   //convert the number of button clicked  to a string
   displayElement = e => {
     this.setState({ display: calculate(this.state.display, e) });
