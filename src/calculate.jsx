@@ -1,15 +1,14 @@
 /*we create a function that takes the state and event of the App component, two strings and returns
 a string*/
 import math from "mathjs";
-
 function calculate(state, event) {
   // these constant are used when we want to make a condition a group of strings
 
   const numberNotZero = /[1-9]/;
   const numbers = /[0-9]/;
 
-  const operators = /[+-/*]/;
-
+  const operators = /[-\/\*\+]/;
+// 
   //limits of numbers of Display component
   if (state.length >= 13) {
     if (event === "←") return state.substring(0, state.length - 1);
@@ -37,13 +36,24 @@ function calculate(state, event) {
       return event;
     }
   }
+  
   //conditions when the event is a point:
   if (event === ".") {
     if (typeof state === "number") return state.toString() + event;
+    if(/\d+\.\d+/.test(state)) {
+      if(/\d+\.\d+[\+-\/\*]\d+/.test(state)){
+      return state + event;
+      }
+      return state ; 
+    }
+    
     if (state === "0") return state + event;
-
-    if (Number.isInteger(parseFloat(state)) === false) return state;
-    if (operators.test(state[state.length - 1])) return state;
+    if (numbers.test(state[state.length - 1])) {
+      return state + event;
+    } else {
+      return state;
+    }
+ 
   }
 
   //conditions when the event is an operator:
@@ -51,8 +61,16 @@ function calculate(state, event) {
     if (typeof state === "number") return state + event;
     if (numbers.test(state[state.length - 1])) {
       return state + event;
-    } else {
-      return state;
+    } else{
+      if(operators.test(state[state.length - 1]) && event !== "-"){
+         if(operators.test(state[state.length - 2])){
+           return state.slice(0, state.length - 2) + event;
+         }
+        return state.slice(0, state.length - 1) + event;
+      }else if(event === "-"){
+        return state + event;
+      }
+      return state
     }
   }
 
@@ -83,4 +101,5 @@ function calculate(state, event) {
     }
   }
 }
+
 export default calculate;

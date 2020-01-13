@@ -4,192 +4,178 @@ import Button from "./button";
 import Display from "./display";
 import calculate from "./calculate";
 import "./app.css";
-
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       display: "0"
     };
+    this.displayElement = this.displayElement.bind(this)
   }
- // ada df a
-  //convert the number of button clicked  to a string
-  displayElement = e => {
-    this.setState({ display: calculate(this.state.display, e) });
+
+  //enter the data to the display and calculate
+  displayElement(e) {
+    
+    this.setState( (state) => {
+      
+      return { display: calculate(state.display, e) }})
   };
+  
   //method to convert to an integer and then calculate
 
   render() {
-    const style = {
-      borderRadius: 0,
-      backgroundColor: "#c8dbe5",
-      width: "50px",
-      height: "50px",
-      outline: 0,
-      margin: 0,
-      padding: 0,
-      border: 0
-    };
+    
     return (
       <div className="container" id="container">
-        <table>
-          <tr>
+       <div className="wrapper" >
+        <div className="display-div">
             <Display number={this.state.display} className="display" />
-          </tr>
-          <tr>
-            <td>
+        </div>
+        <div className="btn-panel">
               <Button
+                id="seven"
                 value="7"
                 handleClick={this.displayElement}
-                //style={style}
+                
                 className="btn"
               />
-            </td>
-            <td>
+         
               <Button
                 value="8"
+                id="eight"
                 handleClick={this.displayElement}
                 className="btn"
-                //style={style}
+                
               />
-            </td>
-            <td>
+           
               <Button
+                id="nine"
                 value="9"
                 handleClick={this.displayElement}
                 className="btn"
-                style={style}
+                
               />
-            </td>
-            <td>
+            
               <Button
+                id="add"
                 value="+"
                 handleClick={this.displayElement}
                 className="btn"
-                style={style}
+              
               />
-            </td>
-            <td>
+            
               <Button
+                id="back"
                 value="←"
                 handleClick={this.displayElement}
                 className="btn"
-                style={style}
+              
               />
-            </td>
-          </tr>
-          <tr>
-            <td>
+          
               <Button
+                id="four"
                 value="4"
                 handleClick={this.displayElement}
                 className="btn"
-                style={style}
+                
               />
-            </td>
-            <td>
+       
               <Button
+                id="five"
                 value="5"
                 handleClick={this.displayElement}
                 className="btn"
-                style={style}
+                
               />
-            </td>
-            <td>
+          
               <Button
+                id="six"
                 value="6"
                 handleClick={this.displayElement}
                 className="btn"
-                style={style}
+                
               />
-            </td>
-            <td>
+           
               <Button
+                id="subtract"
                 value="-"
                 handleClick={this.displayElement}
                 className="btn"
-                style={style}
+                
               />
-            </td>
-            <td>
+          
               <Button
+                id="clear"
                 value="C"
                 handleClick={this.displayElement}
                 className="btn"
-                style={style}
+               
               />
-            </td>
-          </tr>
-          <tr>
-            <td>
+            
               <Button
+                id="one"
                 value="1"
                 handleClick={this.displayElement}
                 className="btn"
-                style={style}
+               
               />
-            </td>
-            <td>
+            
               <Button
+                id="two"
                 value="2"
                 handleClick={this.displayElement}
                 className="btn"
-                style={style}
+              
               />
-            </td>
-            <td>
+            
               <Button
+                id="three"
                 value="3"
                 handleClick={this.displayElement}
                 className="btn"
-                style={style}
+                
               />
-            </td>
-            <td>
+            
               <Button
+                id="divide"
                 value="/"
                 handleClick={this.displayElement}
                 className="btn"
-                style={style}
+               
               />
-            </td>
-            <td rowspan="2">
+            
               <Button
-                id="equal"
+                id="equals"
                 value="="
                 handleClick={this.displayElement}
                 className="btn"
-                //style={style}
+                
               />
-            </td>
-          </tr>
-          <tr>
-            <td colspan="2">
-              <Button
+        
+              <Button 
                 value="0"
                 id="zero"
                 handleClick={this.displayElement}
                 className="btn"
               />
-            </td>
-            <td>
+            
               <Button
+                id="decimal"
                 value="."
                 handleClick={this.displayElement}
                 className="btn"
-                style={style}
+              
               />
-            </td>
-            <td>
+            
               <Button
+                id="multiply"
                 value="*"
                 handleClick={this.displayElement}
                 className="btn"
-                style={style}
+               
               />
-            </td>
-          </tr>
-        </table>
+         </div>
+        </div>
       </div>
     );
   }
